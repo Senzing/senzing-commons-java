@@ -220,7 +220,11 @@ public class JsonUtils {
     if (obj == null) return defaultValue;
     if (!obj.containsKey(key)) return defaultValue;
 
-    return obj.isNull(key) ? defaultValue : obj.getJsonNumber(key).intValue();
+    if (obj.isNull(key)) {
+      return defaultValue;
+    } else {
+      return obj.getJsonNumber(key).intValue();
+    }
   }
 
   /**
