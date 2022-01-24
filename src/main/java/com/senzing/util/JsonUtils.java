@@ -220,7 +220,16 @@ public class JsonUtils {
     if (obj == null) return defaultValue;
     if (!obj.containsKey(key)) return defaultValue;
 
-    return obj.isNull(key) ? defaultValue : obj.getJsonNumber(key).intValue();
+    return obj.isNull(key) ? defaultValue : foo(obj,key);
+  }
+
+  private static Integer foo(JsonObject obj, String key) {
+    if (obj.isNull(key)) {
+      System.err.println();
+      System.err.println("******* CALLED WITH NULL VALUE: " + key);
+      System.err.println();
+    }
+    return obj.getJsonNumber(key).intValue();
   }
 
   /**
